@@ -104,10 +104,11 @@
 
     d3.csv("https://raw.githubusercontent.com/SRoscoe27/ResearchProject/Backup_Branch/csv/Covid-19AttackInformation.csv", function(data) {
 
+
         // Add X axis
         const x = d3.scaleTime()
             .domain(d3.extent(data, function(d) {
-                return d3.timeParse("%Y-%m-%d")(d.AttackDate);
+                return (d.AttackDate);
             }))
             .range([0, width]).nice();
         var xAxis = svg.append("g")
