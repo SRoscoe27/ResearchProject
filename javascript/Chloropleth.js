@@ -2,6 +2,8 @@
      width = +svg.attr("width"),
      height = +svg.attr("height");
 
+ console.log("I'm here!");
+
  // Map and projection
  const path = d3.geoPath();
  const projection = d3.geoMercator()
@@ -20,6 +22,7 @@
      d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"),
      d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world_population.csv", function(d) {
          data.set(d.code, +d.pop)
+         console.log("I can read this too!");
      })
  ]).then(function(loadData) {
      let topo = loadData[0]
