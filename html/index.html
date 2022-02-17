@@ -302,6 +302,7 @@
 
 
         d3.csv("https://raw.githubusercontent.com/SRoscoe27/ResearchProject/Backup_Branch/csv/LockdownDates.csv").then(function(data2) {
+            console.log(data2)
 
             scatter.selectAll("dot")
                 .data(data2) // the .filter part is just to keep a few dots on the chart, not all of them
@@ -310,12 +311,13 @@
                 .attr("x", function(d) {
                     // console.log(d);
                     // console.log(d3.timeParse("%Y-%m-%d")(d[0]));
-                    return x(d3.timeParse("%Y-%m-%d")(d[0]))
+                    return x(d3.timeParse("%Y-%m-%d")(d.StartDate))
                 })
                 .attr("width", function(d) {
                     // console.log(d);
                     // console.log(d3.timeParse("%Y-%m-%d")(d[0]));
-                    return x(d3.timeParse("%Y-%m-%d")(d[1])) - x(d3.timeParse("%Y-%m-%d")(d[0]))
+                    console.log(d3.timeParse("%Y-%m-%d")(d.EndDate), " ", d3.timeParse("%Y-%m-%d")(d.StartDate))
+                    return x(d3.timeParse("%Y-%m-%d")(d.EndDate)) - x(d3.timeParse("%Y-%m-%d")(d.StartDate))
                 })
                 .attr("y", 0)
                 .attr("height", height)
