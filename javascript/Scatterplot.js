@@ -204,6 +204,28 @@ function loadFile(event) {
             .on("mouseover", mouseover)
             .on("mousemove", mousemove)
             .on("mouseleave", mouseleave)
+
+        scatter.selectAll("dot")
+            .data(data2) // the .filter part is just to keep a few dots on the chart, not all of them
+            .enter()
+            .append("rect")
+            .attr("x", function(d) {
+                // console.log(d);
+                // console.log(d3.timeParse("%Y-%m-%d")(d[0]));
+                return x(d3.timeParse("%Y-%m-%d")(d[0]))
+            })
+            .attr("width", function(d) {
+                // console.log(d);
+                // console.log(d3.timeParse("%Y-%m-%d")(d[0]));
+                return x(d3.timeParse("%Y-%m-%d")(d[1])) - x(d3.timeParse("%Y-%m-%d")(d[0]))
+            })
+            .attr("y", 0)
+            .attr("height", height)
+            .attr("fill", "blue")
+            .attr("opacity", "0.05")
+            .on("mouseover", mouseover)
+            .on("mousemove", mousemove)
+            .on("mouseleave", mouseleave)
     });
 }
 

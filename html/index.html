@@ -312,7 +312,6 @@
                     return x(d3.timeParse("%Y-%m-%d")(d.StartDate))
                 })
                 .attr("width", function(d) {
-                    console.log(d3.timeParse("%Y-%m-%d")(d.EndDate), " ", d3.timeParse("%Y-%m-%d")(d.StartDate))
                     return x(d3.timeParse("%Y-%m-%d")(d.EndDate)) - x(d3.timeParse("%Y-%m-%d")(d.StartDate))
                 })
                 .attr("y", 0)
