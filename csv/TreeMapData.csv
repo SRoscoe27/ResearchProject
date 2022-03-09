@@ -1,0 +1,45 @@
+Country,Parent,CountryAmount
+Origin,,
+Global,Origin,1
+US,Origin,167
+Australia,Origin,15
+Croatia,Origin,1
+China,Origin,2
+Spain,Origin,2
+UK,Origin,35
+Switzerland,Origin,4
+Portugal,Origin,1
+Germany,Origin,10
+Hong Kong,Origin,2
+Canada,Origin,21
+Austria,Origin,2
+South Africa,Origin,2
+Singapore,Origin,1
+Norway,Origin,5
+New Zealand,Origin,3
+Italy,Origin,7
+France,Origin,10
+Argentina,Origin,2
+Japan,Origin,7
+Netherlands,Origin,5
+South Korea,Origin,2
+Chile,Origin,2
+Thailand,Origin,2
+Ukraine,Origin,1
+Seychelles,Origin,1
+Pakistan,Origin,1
+India,Origin,5
+Trinidad and Tobago,Origin,1
+Finland,Origin,2
+Brazil,Origin,7
+Taiwan,Origin,6
+Denmark,Origin,1
+Mexico,Origin,1
+Norway,Origin,5
+Belgium,Origin,3
+Israel,Origin,2
+Poland,Origin,1
+Ecuador,Origin,3
+Ireland,Origin,4
+Slovakia,Origin,2
+Russia,Origin,2
