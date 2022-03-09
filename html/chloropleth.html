@@ -76,9 +76,7 @@
         .attr("y", function(d, i) {
             return 100 + i * (size + 5) + (size / 2)
         }) // 100 is where the first dot appears. 25 is the distance between dots
-        .style("fill", function(d) {
-            return colorScale(d)
-        })
+        .style("fill", "black")
         .text(function(d) {
             return d
         })
