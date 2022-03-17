@@ -1,5 +1,3 @@
-,,,,,,,,,,,,
-,,,,,,,,,,,,
 ID,Ref,RefrenceInTechnicalReport,RefrenceURL,Country,RansomwareName,RansomwareType,Group,Sector,SectorDetailed ,Description,ArticleDate,AttackDate
 1,[1],N/A,https://www.bbc.co.uk/news/business-51017852,Global,Sodinokibi,C,REvil,Finance,Finance,Ransomware attack on Travelex currency exchange,2020-04-16,2020-01-02
 2,[3][4],[4] is [3],"[3] https://www.cbsnews.com/news/ransomware-attack-shuts-down-richmond-michigan-school-district  , [4]  https://k12cybersecure.com/year-in-review/ ",US,?,C,?,Education,Education,Ransomware attack shuts down some Michigan schools - Latest of a string of K-12 ransomware attacks ,2020-01-02,2020-01-01
@@ -360,4 +358,3 @@ ID,Ref,RefrenceInTechnicalReport,RefrenceURL,Country,RansomwareName,RansomwareTy
 357,[363],N/A,https://www.itworldcanada.com/article/northern-ontario-police-force-recovering-from-ransomware-attack/457701,Canada,?,C,?,Other,Law Enforcement,The Sault Ste. Marie Police in Ontario Canada became a victim of ransomware in the third week of August. ,2021-08-30,2021-08-26
 358,"[364], [365]",N/A,"[364] https://ocrportal.hhs.gov/ocr/breach/breach_report.jsf , [365] https://carepointe.net/wp-content/uploads/2021/08/Data-Security-Incident-1.pdf ",US,?,C,?,Healthcare,Healthcare,"Indiana based CarePointe ENT, an ear, nose, throat, sinUSand hearing center, suffered a ransomware attack that may have exposed the personal health data of nearly 50,000 patients.",2021-08-23,2021-06-25
 359,[366],N/A,https://www.zdnet.com/article/new-crycryptor-ransomware-masquerades-as-covid-19-contact-tracing-app-on-your-device/,Canada,CryCryptor,C,CryCryptor,Healthcare,Healthcare,CryCryptor ransomware masquerades as COVID-19 contact-tracing apps on Android device,2020-06-22,2020-06-24
-,,,,,,,,,,,,
