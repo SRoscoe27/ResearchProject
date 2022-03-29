@@ -57,13 +57,13 @@
     // Data and color scale
     let data = new Map()
     const colorScale = d3.scaleThreshold()
-        .domain([0, 1, 2, 5, 10, 50, 200])
+        .domain([0, 1, 2, 5, 10, 50, 150])
         .range(d3.schemeBlues[8]);
 
     // Create legend
     var size = 20
-    var keys = ["0", "1", "2", "5", "10", "50", "200"]
-    var keysLabels = ["0", "1", "2-4", "5-9", "10-49", "50-199", ">= 200"]
+    var keys = ["0", "1", "2", "5", "10", "50", "150"]
+    var keysLabels = ["0", "1", "2-4", "5-9", "10-49", "50-149", ">= 150"]
 
     svg.append("g")
         .attr("transform", "translate(80,80)")

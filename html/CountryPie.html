@@ -23,7 +23,7 @@
 
 <script>
     // set the dimensions and margins of the graph
-    const width = 750,
+    const width = 950,
         height = 750,
         margin = 40;
 
@@ -39,56 +39,20 @@
         .attr("transform", `translate(${width/2},${height/2})`);
 
     // Create dummy data
-    const data = {
-        Global: 1,
+    var data = {
         USA: 167,
-        Australia: 15,
-        Croatia: 1,
-        China: 2,
-        Spain: 2,
         UK: 35,
-        Switzerland: 4,
-        Portugal: 1,
-        Germany: 10,
-        HongKong: 2,
         Canada: 21,
-        Austria: 2,
-        South_Africa: 2,
-        Singapore: 1,
-        Norway: 5,
-        New_Zealand: 3,
-        Italy: 7,
+        Australia: 15,
         France: 10,
-        Argentina: 2,
-        Japan: 7,
-        Netherland: 5,
-        South_Korea: 2,
-        Chile: 2,
-        Thailand: 2,
-        Ukraine: 1,
-        Seychelles: 1,
-        Pakistan: 1,
-        India: 5,
-        Trinidad_And_Tobago: 1,
-        Finland: 2,
-        Brazil: 7,
-        Taiwan: 6,
-        Denmark: 1,
-        Mexico: 1,
-        Norway: 5,
-        Belgium: 3,
-        Israel: 2,
-        Poland: 1,
-        Ecuador: 3,
-        Ireland: 4,
-        Slovakia: 2,
-        Russia: 2
+        Germany: 10,
+        Other: 101
     }
 
     // set the color scale
     const color = d3.scaleOrdinal()
-        .domain(["a", "b", "c", "d", "e", "f", "g", "h"])
-        .range(d3.schemeDark2);
+        .domain(["a", "b", "c", "d", "e", "f", "g"])
+        .range(["#0066cc", "#ff9900", "#b3b3cc", "#ffcc00", "#66cc66", "#000066", "#2d5986"]);
 
     // Compute the position of each group on the pie:
     const pie = d3.pie()

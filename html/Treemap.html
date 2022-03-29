@@ -19,6 +19,7 @@
 </head>
 
 <script src="https://d3js.org/d3.v6.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <div id="my_dataviz"></div>
 
 <script>
@@ -43,6 +44,9 @@
 
     // Read data
     d3.csv('https://raw.githubusercontent.com/SRoscoe27/ResearchProject/Backup_Branch/csv/TreeMapData.csv').then(function(data) {
+
+        var color = d3.scaleSequential().domain([1, 10])
+            .interpolator(d3.interpolateViridis);
 
         function wrap(text, width) {
             text.each(function() {
@@ -115,7 +119,9 @@
                 return d.y1 - d.y0;
             })
             .style("stroke", "black")
-            .style("fill", "#69b3a2");
+            .style("fill", function(d, i) {
+                return color(i);
+            });
 
         // and to add the text labels
         svg
