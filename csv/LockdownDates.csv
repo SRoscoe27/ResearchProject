@@ -1,12 +1,7 @@
-StartDate,EndDate,Description
-2020-01-06,2020-01-06,China's 1st Lockdown
+StartDate,End Date,Description
 2020-03-01,2020-05-31,First Covid-19 Wave (UK)
 2020-03-13,2020-09-14,US Quarantine and Tourist Screening
-2020-03-17,2020-03-17,France Lockdown
-2020-03-18,2020-03-18,Spain Lockdown
-2020-03-20,2020-03-20,Germany Lockdown
 2020-03-23,2020-07-04,UK's 1st Lockdown
-2020-09-03,2020-09-03,Italy Lockdown
 2020-09-08,2020-09-21,Announcement of phase 3 trials by leading vaccine producers
 2020-09-11,2020-12-01,Second Wave (UK)
 2020-12-08,2020-12-08,First vaccine rollout in UK
