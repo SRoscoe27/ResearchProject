@@ -24,13 +24,6 @@
             width: 300px;
             height: 300px;
         }
-        /* #my_dataviz {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            padding: 10px;
-        } */
     </style>
 
 </head>
@@ -185,8 +178,8 @@
         var colorDates = d3.scaleOrdinal()
             .domain([0, 15])
             .range(["#FBF8CC", "#FDE4CF", "#FFCFD2", "#F1C0E8", "#CFBAF0", "#90DBF4", "#8EECF5", "#A3C4F3", "#98F5E1", "#B9FBC0", "#F08080", "#F9DC5C", "#68EDC6", "#E365C1"])
-            // Add a tooltip div. Here I define the general feature of the tooltip: stuff that do not depend on the data point.
-            // Its opacity is set to 0: we don't see it by default.
+
+        // Add a tooltip div. 
         const tooltip = d3.select("#my_dataviz")
             .append("div")
             .style("opacity", 0)
@@ -307,6 +300,7 @@
             .on("mouseleave", mouseleave)
 
 
+        //Add Lockdown Date shaded areas
         d3.csv("https://raw.githubusercontent.com/SRoscoe27/ResearchProject/Backup_Branch/csv/LockdownDates.csv").then(function(data2) {
             console.log(data2)
 
