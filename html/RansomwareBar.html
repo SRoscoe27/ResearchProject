@@ -74,6 +74,21 @@
         svg.append("g")
             .call(d3.axisLeft(y));
 
+        // Add X axis label:
+        svg.append("text")
+            .attr("text-anchor", "end")
+            .attr("x", width / 2 + margin.left)
+            .attr("y", height + margin.top + 80)
+            .text("Date (yy-mm-dd)");
+
+        // Y axis label:
+        svg.append("text")
+            .attr("text-anchor", "end")
+            .attr("transform", "rotate(-90)")
+            .attr("y", -margin.left + 20)
+            .attr("x", -margin.top - height / 2 + 20)
+            .text("Ransomware Strains Total")
+
         const color = d3.scaleOrdinal()
             .domain(subGroups)
             .range(["#fdffb6", "#606c38", "#6d6875", "#370617", "#6a040f", "#9d0208", "#d00000", "#dc2f02", "#e85d04", "#f48c06", "#faa307", "#ffba08", "#f72585", "#b5179e", "#7209b7", "#560bad", "#3a0ca3", "#3f37c9", "#4361ee", "#4895ef", "#4cc9f0", "#d9ed92", "#b5e48c", "#99d98c", "#76c893", "#52b69a", "#34a0a4", "#168aad", "#1a759f", "#ffcbf2", "#f3c4fb", "#c8e7ff", "#c0fdff"])
