@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+    <title>Choropleth Map</title>
+    <meta charset='utf-8' name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        .caption {
+            fill: #000;
+            text-anchor: start;
+            font-weight: bold;
+        }
+        
+        #my_dataviz {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px;
+        }
+    </style>
+
+</head>
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v6.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<h3>Chloropleth Map</h3>
+
+<!-- Create an element where the map will take place -->
+<div id="tooltip"></div>
+<svg id="my_dataviz" width="1000" height="800"></svg>
+
+<script>
+    // The svg
+    const svg = d3.select("svg"),
+        width = +svg.attr("width"),
+        height = +svg.attr("height");
+
+    var tooltip = d3.select("#tooltip")
+        .style("opacity", 0)
+        .attr("class", "tooltip")
+        .style("background-color", "white")
+        .style("border", "solid")
+        .style("border-width", "1px")
+        .style("border-radius", "5px")
+        .style("padding", "5px")
+        .style("position", "absolute")
+
+    // Map and projection
+    const path = d3.geoPath();
+    const projection = d3.geoMercator()
+        .scale(70)
+        .center([0, 20])
+        .translate([width / 2, height / 2]);
+
+    // Data and color scale
+    let data = new Map()
+    const colorScale = d3.scaleThreshold()
+        .domain([0, 1, 2, 5, 10, 50, 150])
+        .range(d3.schemeBlues[8]);
+
+    // Create legend
+    var size = 20
+    var keys = ["0", "1", "2", "5", "10", "50", "150"]
+    var keysLabels = ["0", "1", "2-4", "5-9", "10-49", "50-149", ">= 150"]
+
+    svg.append("g")
+        .attr("transform", "translate(80,80)")
+        .append("text")
+        .attr("class", "caption")
+        .attr("x", 0)
+        .attr("y", -6)
+        .text("Number of ransomware attacks per country");
+
+    svg.selectAll("mylegend")
+        .data(keys)
+        .enter()
+        .append("rect")
+        .attr("x", 100)
+        .attr("y", function(d, i) {
+            return 100 + i * (size + 5)
+        }) // 100 is where the first dot appears. 25 is the distance between dots
+        .attr("width", size)
+        .attr("height", size)
+        .style("fill", function(d) {
+            return colorScale(d)
+        })
+
+    svg.selectAll("mylabels")
+        .data(keysLabels)
+        .enter()
+        .append("text")
+        .attr("x", 100 + size * 1.2)
+        .attr("y", function(d, i) {
+            return 100 + i * (size + 5) + (size / 2)
+        }) // 100 is where the first dot appears. 25 is the distance between dots
+        .style("fill", "black")
+        .text(function(d) {
+            return d
+        })
+        .attr("text-anchor", "left")
+        .style("alignment-baseline", "middle")
+
+
+    // Load external data and boot
+    Promise.all([
+        d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"),
+        d3.csv("https://raw.githubusercontent.com/SRoscoe27/ResearchProject/Backup_Branch/csv/ChoroplethData.csv", function(d) {
+            data.set(d.Code, +d.Pop)
+        })
+    ]).then(function(topo) {
+        var topo = topo[0]
+
+        let mouseOver = function(d) {
+            d3.selectAll(".Country")
+                .transition()
+                .duration(200)
+                .style("opacity", .5)
+            d3.select(this)
+                .transition()
+                .duration(200)
+                .style("opacity", 1)
+                .style("stroke", "black")
+
+            d.total = data.get(d.id) || 0;
+
+            tooltip
+                .style("opacity", 0.8)
+                .html(d.id + ": " + d3.format(",.2r")(d.total))
+                .style("left", (event.pageX) + "px")
+                .style("top", (event.pageY - 28) + "px");
+        }
+
+        let mouseLeave = function(d) {
+            d3.selectAll(".Country")
+                .transition()
+                .duration(200)
+                .style("opacity", .8)
+            d3.select(this)
+                .transition()
+                .duration(200)
+                .style("stroke", "transparent")
+            tooltip
+                .style("opacity", 0)
+        }
+
+        // Draw the map
+        svg.append("g")
+            .selectAll("path")
+            .data(topo.features)
+            .join("path")
+            // draw each country
+            .attr("d", d3.geoPath()
+                .projection(projection)
+            )
+            // set the color of each country
+            .attr("fill", function(d) {
+                d.total = data.get(d.id) || 0;
+                return colorScale(d.total);
+            })
+            .style("stroke", "transparent")
+            .attr("class", function(d) {
+                return "Country"
+            })
+            .style("opacity", .8)
+            .on("mouseover", mouseOver)
+            .on("mouseleave", mouseLeave)
+    })
+</script>

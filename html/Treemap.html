@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+    <title>TreeMap Map</title>
+    <meta charset='utf-8' name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        #my_dataviz {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px;
+        }
+    </style>
+
+
+</head>
+
+<script src="https://d3js.org/d3.v6.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<h3>Country TreeMap</h3>
+<div id="my_dataviz"></div>
+
+<script>
+    // set the dimensions and margins of the graph
+    const margin = {
+            top: 10,
+            right: 25,
+            bottom: 10,
+            left: 10
+        },
+        width = 900 - margin.left - margin.right,
+        height = 600 - margin.top - margin.bottom;
+
+    // append the svg object to the body of the page
+    const svg = d3.select("#my_dataviz")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+            `translate(${margin.left}, ${margin.top})`);
+
+    // Read data
+    d3.csv('https://raw.githubusercontent.com/SRoscoe27/ResearchProject/Backup_Branch/csv/TreeMapData.csv').then(function(data) {
+
+        var color = d3.scaleSequential().domain([1, 10])
+            .interpolator(d3.interpolateViridis);
+
+        function wrap(text, width) {
+            text.each(function() {
+                var text = d3.select(this),
+                    words = text.text().split(/\s+/).reverse(),
+                    word,
+                    line = [],
+                    lineNumber = 0,
+                    lineHeight = 1.1, // ems
+                    x = text.attr("x"),
+                    y = text.attr("y"),
+                    dy = 0, //parseFloat(text.attr("dy")),
+                    tspan = text.text(null)
+                    .append("tspan")
+                    .attr("x", x)
+                    .attr("y", y)
+                    .attr("dy", dy + "em");
+                while (word = words.pop()) {
+                    line.push(word);
+                    tspan.text(line.join(" "));
+                    if (tspan.node().getComputedTextLength() > width) {
+                        line.pop();
+                        tspan.text(line.join(" "));
+                        line = [word];
+                        tspan = text.append("tspan")
+                            .attr("x", x)
+                            .attr("y", y)
+                            .attr("dy", ++lineNumber * lineHeight + dy + "em")
+                            .text(word);
+                    }
+                }
+            });
+        }
+
+        // stratify the data: reformatting for d3.js
+        const root = d3.stratify()
+            .id(function(d) {
+                return d.Country;
+            }) // Name of the entity (column name is name in csv)
+            .parentId(function(d) {
+                return d.Parent;
+            }) // Name of the parent (column name is parent in csv)
+            (data);
+        root.sum(function(d) {
+                return +d.CountryAmount
+            }) // Compute the numeric value for each entity
+
+        // Then d3.treemap computes the position of each element of the hierarchy
+        // The coordinates are added to the root object above
+        d3.treemap()
+            .size([width, height])
+            .padding(4)
+            (root)
+
+        // use this information to add rectangles:
+        svg
+            .selectAll("rect")
+            .data(root.leaves())
+            .join("rect")
+            .attr('x', function(d) {
+                return d.x0;
+            })
+            .attr('y', function(d) {
+                return d.y0;
+            })
+            .attr('width', function(d) {
+                return d.x1 - d.x0;
+            })
+            .attr('height', function(d) {
+                return d.y1 - d.y0;
+            })
+            .style("stroke", "black")
+            .style("fill", function(d, i) {
+                return color(i);
+            });
+
+        // and to add the text labels
+        svg
+            .selectAll("text")
+            .data(root.leaves())
+            .join("text")
+            .attr("x", function(d) {
+                return d.x0 + 5
+            }) // +10 to adjust position (more right)
+            .attr("y", function(d) {
+                return d.y0 + 15
+            }) // +20 to adjust position (lower)
+            .text(function(d) {
+                return d.data.Country + " : " + d.data.CountryAmount
+            })
+            .attr("font-size", "11px")
+            .attr("font-weight", "bold")
+            .attr("fill", "black")
+            .call(wrap, 40);
+    })
+</script>
